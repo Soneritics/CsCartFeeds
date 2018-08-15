@@ -1,3 +1,5 @@
+msgid ""
+msgstr ""
 "Project-Id-Version: soneritics\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language: en_EN\n"
@@ -12,6 +14,11 @@ msgctxt "Addons::description::soneritics_feeds"
 msgid "Data feed exports"
 msgstr "Data feed exports"
 
+msgctxt "Languages::soneritics_feeds"
+msgid "Data feeds"
+msgstr "Data feeds"
+
 msgctxt "Languages::addons.soneritics_feeds.example"
 msgid "Example"
 msgstr "Example"
+
