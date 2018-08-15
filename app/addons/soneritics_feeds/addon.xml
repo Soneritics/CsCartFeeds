@@ -7,4 +7,25 @@
     <priority>1000</priority>
     <status>active</status>
     <has_icon>Y</has_icon>
+    <queries>
+        <item>
+            CREATE TABLE IF NOT EXISTS `?:soneritics_feeds`(
+                `id` INT NOT NULL AUTO_INCREMENT,
+                `company_id` INT(11) NOT NULL,
+                `lang_code` CHAR(2) NOT NULL,
+                `name` VARCHAR(255) NOT NULL,
+                `parser` VARCHAR(50) NOT NULL,
+                PRIMARY KEY (`id`)
+            );
+        </item>
+        <item>
+            CREATE TABLE IF NOT EXISTS `?:soneritics_feed_products`(
+                `feed_id` INT NOT NULL,
+                `product_id` MEDIUMINT(8) NOT NULL,
+                PRIMARY KEY (`feed_id`, `product_id`)
+            );
+        </item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:soneritics_feeds`</item>
+        <item for="uninstall">DROP TABLE IF EXISTS `?:soneritics_feed_products`</item>
+    </queries>
 </addon>
