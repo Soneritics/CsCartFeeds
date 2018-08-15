@@ -1,0 +1,17 @@
+"Project-Id-Version: soneritics\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: nl_NL\n"
+"Last-Translator: Jordi Jolink <translate@jordijolink.nl>\n"
+"PO-Revision-Date: 2018-08-15 21:00+0200\n"
+
+msgctxt "Addons::name::soneritics_feeds"
+msgid "Soneritics Data Feeds"
+msgstr "Soneritics Data Feeds"
+
+msgctxt "Addons::description::soneritics_feeds"
+msgid "Data feed exports"
+msgstr "Data feed exports"
+
+msgctxt "Languages::addons.soneritics_feeds.example"
+msgid "Example"
+msgstr "Voorbeeld"
