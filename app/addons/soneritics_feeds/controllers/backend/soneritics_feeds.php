@@ -42,7 +42,6 @@ if ($mode === 'manage') {
     if (!empty($feedId)) {
         db_query("DELETE FROM ?:soneritics_feeds WHERE id = ?i", $feedId);
         fn_set_notification('N', 'feed deleted', 'The feed has been deleted');
-
         return array(CONTROLLER_STATUS_OK, 'soneritics_feeds.manage');
     }
 
