@@ -34,9 +34,9 @@ if ($mode === 'manage') {
     $feeds = db_get_array("SELECT * FROM ?:soneritics_feeds ORDER BY `name` ASC");
     Tygh::$app['view']->assign('feeds', $feeds);
 
-    /*******************************************************************/
+/*******************************************************************/
 //                           DELETE FEED                           //
-    /*******************************************************************/
+/*******************************************************************/
 } elseif ($mode === 'delete') {
     $feedId = empty($_GET['soneritics_feed_id']) ? 0 : (int)$_GET['soneritics_feed_id'];
     if (!empty($feedId)) {
