@@ -33,7 +33,7 @@
                         <div class="controls">
                             <select name="soneriticsFeed[{$i}]">
                                 {foreach from=$list item=v key=k}
-                                    <option value="{$k}" {if $k == $soneriticsFeed[$k]}selected="selected"{/if}>{$v}</option>
+                                    <option value="{$k}" {if $k == $soneriticsFeed[$i]}selected="selected"{/if}>{$v}</option>
                                 {/foreach}
                             </select>
                         </div>
