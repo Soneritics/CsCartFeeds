@@ -9,15 +9,16 @@
         {if $feeds}
             <table class="table sortable table-middle">
                 <thead>
-                <tr>
-                    <th width="39%" class="nowrap">{__("name")}</th>
-                    <th width="25%" class="nowrap">{__("parser")}</th>
-                    <th width="30%" class="nowrap">{__("company")}</th>
-                    <th width="10%" class="nowrap">{__("language")}</th>
-                    <th width="1%" class="nowrap">&nbsp;</th>
-                </tr>
+                    <tr>
+                        <th width="39%" class="nowrap">{__("name")}</th>
+                        <th width="25%" class="nowrap">{__("parser")}</th>
+                        <th width="30%" class="nowrap">{__("company")}</th>
+                        <th width="10%" class="nowrap">{__("language")}</th>
+                        <th width="1%" class="nowrap">&nbsp;</th>
+                    </tr>
                 </thead>
                 {foreach from=$feeds item=feed}
+                    <tr>
                         <td><a href="{"soneritics_feeds.products?soneritics_feed_id=`$feed.id`"|fn_url}">{$feed.name}</a></td>
                         <td class="nowrap">{SoneriticsFeedParserFactory::getParserDisplayName($feed.parser)}</td>
                         <td class="nowrap">{fn_get_company_name($feed.company_id)}</td>
