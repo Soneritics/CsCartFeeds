@@ -6,49 +6,34 @@
 
 {capture name="mainbox"}
     <form action="{""|fn_url}" method="post" name="manage_datafeeds_form">
-        {if $datafeeds}
+        {if $feeds}
             <table class="table sortable table-middle">
                 <thead>
                 <tr>
-                    <th width="5%" class="left">{include file="common/check_items.tpl"}</th>
-                    <th width="45%" class="nowrap">{__("name")}</th>
-                    <th width="35%" class="nowrap">{__("filename")}</th>
+                    <th width="39%" class="nowrap">{__("name")}</th>
+                    <th width="25%" class="nowrap">{__("parser")}</th>
+                    <th width="30%" class="nowrap">{__("company")}</th>
+                    <th width="10%" class="nowrap">{__("language")}</th>
                     <th width="1%" class="nowrap">&nbsp;</th>
-                    <th width="5%" class="nowrap right">{__("status")}</th>
                 </tr>
                 </thead>
-                {foreach from=$datafeeds item=datafeed}
-                    <tr class="cm-row-status-{$datafeed.status|lower}">
-                        <td class="left">
-                            <input type="checkbox" name="datafeed_ids[]" value="{$datafeed.datafeed_id}" class="checkbox cm-item" />
-                        </td>
-
-                        <td>
-                            <a href="{"data_feeds.update?datafeed_id=`$datafeed.datafeed_id`"|fn_url}">{$datafeed.datafeed_name}</a>
-                            {include file="views/companies/components/company_name.tpl" object=$datafeed}
-                        </td>
-
-                        <td class="nowrap">
-                            {$datafeed.file_name}
-                        </td>
+                {foreach from=$feeds item=feed}
+                        <td><a href="{"soneritics_feeds.products?soneritics_feed_id=`$feed.id`"|fn_url}">{$feed.name}</a></td>
+                        <td class="nowrap">{SoneriticsFeedParserFactory::getParserDisplayName($feed.parser)}</td>
+                        <td class="nowrap">{fn_get_company_name($feed.company_id)}</td>
+                        <td class="nowrap">{$feed.lang_code}</td>
 
                         <td class="nowrap">
                             {capture name="tools_list"}
-                                <li>{btn type="list" class="cm-confirm cm-ajax cm-comet" text=__("local_export") href="exim.export_datafeed?datafeed_ids[]=`$datafeed.datafeed_id`&location=L"}</li>
-                                <li>{btn type="list" class="cm-confirm cm-ajax cm-comet" text=__("export_to_server") href="exim.export_datafeed?datafeed_ids[]=`$datafeed.datafeed_id`&location=S"}</li>
-                                <li>{btn type="list" class="cm-confirm cm-ajax cm-comet" text=__("upload_to_ftp") href="exim.export_datafeed?datafeed_ids[]=`$datafeed.datafeed_id`&location=F"}</li>
+                                <li>{btn type="list" text=__("link") href="index.php?dispatch=sfl.show&id=`$feed.id`" target="_blank"}</li>
                                 <li class="divider"></li>
-                                <li>{btn type="list" text=__("edit") href="data_feeds.update?datafeed_id=`$datafeed.datafeed_id`"}</li>
+                                <li>{btn type="list" text=__("edit") href="soneritics_feeds.update?soneritics_feed_id=`$feed.id`"}</li>
+                                <li>{btn type="list" text=__("delete") href="soneritics_feeds.delete?soneritics_feed_id=`$feed.id`"}</li>
                             {/capture}
                             <div class="hidden-tools">
                                 {dropdown content=$smarty.capture.tools_list}
                             </div>
                         </td>
-
-                        <td class="nowrap right">
-                            {include file="common/select_popup.tpl" id=$datafeed.datafeed_id status=$datafeed.status hidden=false object_id_name="datafeed_id" table="data_feeds"}
-                        </td>
-
                     </tr>
                 {/foreach}
             </table>

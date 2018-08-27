@@ -54,7 +54,7 @@ class SoneriticsFeedParserFactory
         $files = glob("*" . static::$pattern);
         if ($files !== false && !empty($files)) {
             foreach ($files as $file) {
-                $result[$file] = str_replace(static::$pattern, '', $file);
+                $result[$file] = static::getParserDisplayName($file);
             }
         }
 
@@ -63,5 +63,26 @@ class SoneriticsFeedParserFactory
 
         // Return the parser list
         return $result;
+    }
+
+    /**
+     * Get the display name for the parser file
+     * @param string $parserFile
+     * @return string
+     */
+    public static function getParserDisplayName(string $parserFile): string
+    {
+        return static::getParserFromFilename($parserFile)->getName();
+    }
+
+    /**
+     * Get a parser object from a filename.
+     * @param string $parserFile
+     * @return ISoneriticsFeedParser
+     */
+    public static function getParserFromFilename(string $parserFile): ISoneriticsFeedParser
+    {
+        $parserClass = substr($parserFile, 0, -4);
+        return new $parserClass();
     }
 }

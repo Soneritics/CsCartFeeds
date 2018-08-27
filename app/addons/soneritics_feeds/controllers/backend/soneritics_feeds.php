@@ -27,8 +27,16 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 $repository = new SoneriticsFeedRepository();
 
+/*******************************************************************/
+//                          FEED OVERVIEW                          //
+/*******************************************************************/
 if ($mode === 'manage') {
+    $feeds = db_get_array("SELECT * FROM ?:soneritics_feeds ORDER BY `name` ASC");
+    Tygh::$app['view']->assign('feeds', $feeds);
 
+/*******************************************************************/
+//                      UPDATE FEED SETTINGS                       //
+/*******************************************************************/
 } elseif ($mode === 'update') {
     // Check if there's a feed to update or that this is a new feed
     $feedId = empty($_GET['soneritics_feed_id']) ? 0 : (int)$_GET['soneritics_feed_id'];
