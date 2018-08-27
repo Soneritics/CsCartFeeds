@@ -34,6 +34,18 @@ if ($mode === 'manage') {
     $feeds = db_get_array("SELECT * FROM ?:soneritics_feeds ORDER BY `name` ASC");
     Tygh::$app['view']->assign('feeds', $feeds);
 
+    /*******************************************************************/
+//                           DELETE FEED                           //
+    /*******************************************************************/
+} elseif ($mode === 'delete') {
+    $feedId = empty($_GET['soneritics_feed_id']) ? 0 : (int)$_GET['soneritics_feed_id'];
+    if (!empty($feedId)) {
+        db_query("DELETE FROM ?:soneritics_feeds WHERE id = ?i", $feedId);
+        fn_set_notification('N', 'feed deleted', 'The feed has been deleted');
+
+        return array(CONTROLLER_STATUS_OK, 'soneritics_feeds.manage');
+    }
+
 /*******************************************************************/
 //                      UPDATE FEED SETTINGS                       //
 /*******************************************************************/
