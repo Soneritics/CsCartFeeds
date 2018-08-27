@@ -28,7 +28,7 @@
                 </div>
 
                 {foreach from=['lang_code' => $langs, 'company_id' => $companies, 'parser' => $parsers] key=i item=list}
-                    <div class="control-group">
+                    <div class="control-group{if count($list) === 1} hidden{/if}">
                         <label class="control-label">{__("Addon:{$i}")}:</label>
                         <div class="controls">
                             <select name="soneriticsFeed[{$i}]">
