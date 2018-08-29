@@ -97,6 +97,7 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                 $item->appendChild($xml->createElement('g:image_link', $product['main_pair']['detailed']['image_path']));
                 $item->appendChild($xml->createElement('g:price', round($product['price'], 2) . ' EUR')); // @todo: hard coded EUR
                 $item->appendChild($xml->createElement('g:condition', 'new')); // @todo: hard coded
+                $item->appendChild($xml->createElement('g:availability', $product['amount'] > 0 ? 'in stock' : 'out of stock'));
                 $item->appendChild($xml->createElement('g:brand', $this->getBrand($product)));
 
                 // More complex product data
