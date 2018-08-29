@@ -11,3 +11,9 @@ and use the description exactly listed below (case insensitive):
 * mpn
 * google product category
 * google product type
+
+Either the _gtin_ or _mpn_ field must be filled to have valid product feed data.
+
+Optional, you can add the feature _condition_.
+If you choose not to use this, all products will be given the _new_ condition.
+If you also want to include _used_ items,this feature is mandatory.

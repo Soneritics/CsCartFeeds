@@ -100,7 +100,7 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                     'g:link' => $product['url'],
                     'g:image_link' => $product['main_pair']['detailed']['image_path'],
                     'g:price' => round($product['price'], 2) . ' EUR', // @todo: hard coded EUR
-                    'g:condition' => 'new', // @todo: hard coded
+                    'g:condition' => $this->getFeature($product, 'condition', 'new'),
                     'g:availability' => $product['amount'] > 0 ? 'in stock' : 'out of stock',
                     'g:brand' => $this->getBrand($product),
                     'g:gtin' => $this->getFeature($product, 'gtin'),
@@ -144,9 +144,10 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
      * Get a specific feature value
      * @param array $product
      * @param string $feature
+     * @param string $default
      * @return string
      */
-    private function getFeature(array $product, string $feature): string
+    private function getFeature(array $product, string $feature, string $default = ''): string
     {
         if (!empty($product['product_features'])) {
             foreach ($product['product_features'] as $productFeature) {
@@ -159,6 +160,6 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
             }
         }
 
-        return '';
+        return $default;
     }
 }
