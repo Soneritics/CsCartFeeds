@@ -42,7 +42,8 @@ if ($mode === 'show' && !empty($parserData)) {
     $params = [
         'force_get_by_ids' => true,
         'pid' => $productIds,
-        'get_frontend_urls' => true
+        'get_frontend_urls' => true,
+        'extend' => ['description']
     ];
     $productData = fn_get_products($params, 0, $data['lang_code']);
 
