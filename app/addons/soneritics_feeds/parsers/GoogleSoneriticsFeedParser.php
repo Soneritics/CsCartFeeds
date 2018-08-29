@@ -63,8 +63,12 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
         $title = $xml->createElement('title', 'Google feed');
         $channel->appendChild($title);
 
+        // Add the feed title to the channel info
+        $title = $xml->createElement('link', 'todo'); // @todo
+        $channel->appendChild($title);
+
         // Add the feed description to the channel info
-        $description = $xml->createElement('description', 'Google feed'); // TODO
+        $description = $xml->createElement('description', 'Google feed'); // @todo
         $channel->appendChild($description);
 
         // Add the products
@@ -88,20 +92,28 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                 // Create the new item node
                 $item = $xml->createElement('item');
 
-                // Simple product data
-                // @todo check if data exists and is not empty
-                $item->appendChild($xml->createElement('g:id', $product['product_code']));
-                $item->appendChild($xml->createElement('g:title', $product['product']));
-                $item->appendChild($xml->createElement('g:description', trim(strip_tags($product['short_description']))));
-                $item->appendChild($xml->createElement('g:link', $product['url']));
-                $item->appendChild($xml->createElement('g:image_link', $product['main_pair']['detailed']['image_path']));
-                $item->appendChild($xml->createElement('g:price', round($product['price'], 2) . ' EUR')); // @todo: hard coded EUR
-                $item->appendChild($xml->createElement('g:condition', 'new')); // @todo: hard coded
-                $item->appendChild($xml->createElement('g:availability', $product['amount'] > 0 ? 'in stock' : 'out of stock'));
-                $item->appendChild($xml->createElement('g:brand', $this->getBrand($product)));
+                // Product data
+                $productData = [
+                    'g:id' => $product['product_code'],
+                    'g:title' => $product['product'],
+                    'g:description' => trim(strip_tags($product['short_description'])),
+                    'g:link' => $product['url'],
+                    'g:image_link' => $product['main_pair']['detailed']['image_path'],
+                    'g:price' => round($product['price'], 2) . ' EUR', // @todo: hard coded EUR
+                    'g:condition' => 'new', // @todo: hard coded
+                    'g:availability' => $product['amount'] > 0 ? 'in stock' : 'out of stock',
+                    'g:brand' => $this->getBrand($product),
+                    'g:gtin' => $this->getFeature($product, 'gtin'),
+                    'g:mpn' => $this->getFeature($product, 'mpn'),
+                    'g:google_product_category' => $this->getFeature($product, 'google product category'),
+                    'g:product_type' => $this->getFeature($product, 'google product type'),
+                ];
 
-                // More complex product data
-                // @todo
+                foreach ($productData as $k => $v) {
+                    if (!empty($v)) {
+                        $item->appendChild($xml->createElement($k, $v));
+                    }
+                }
 
                 // Add the item to the feed
                 $channel->appendChild($item);
@@ -121,6 +133,28 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                 if (!empty($feature['feature_type']) && $feature['feature_type'] === 'E') {
                     $activeVariantId = $feature['variant_id'];
                     return $feature['variants'][$activeVariantId]['variant'];
+                }
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Get a specific feature value
+     * @param array $product
+     * @param string $feature
+     * @return string
+     */
+    private function getFeature(array $product, string $feature): string
+    {
+        if (!empty($product['product_features'])) {
+            foreach ($product['product_features'] as $productFeature) {
+                if (
+                    !empty($productFeature['description']) &&
+                    strtolower($productFeature['description']) === strtolower($feature)
+                ) {
+                    return $productFeature['value'];
                 }
             }
         }
