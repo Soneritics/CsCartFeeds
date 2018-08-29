@@ -44,6 +44,86 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
      */
     public function parse(array $products)
     {
-        // TODO: Implement parse() method.
+        // Send the XML content type header
+        header('Content-type: application/xml');
+
+        // Create the XML header
+        $xml = new DOMDocument('1.0', 'UTF-8');
+
+        // Create the RSS root node
+        $rss = $xml->createElement("rss");
+        $rss->setAttribute('version', '2.0');
+        $rss->setAttribute('xmlns:g', 'http://base.google.com/ns/1.0');
+
+        // Add the channel node to the RSS node
+        $channel = $xml->createElement('channel');
+        $rss->appendChild($channel);
+
+        // Add the feed title to the channel info
+        $title = $xml->createElement('title', 'Google feed');
+        $channel->appendChild($title);
+
+        // Add the feed description to the channel info
+        $description = $xml->createElement('description', 'Google feed'); // TODO
+        $channel->appendChild($description);
+
+        // Add the products
+        $this->parseProductData($xml, $channel, $products);
+
+        // Show the XML content
+        $xml->appendChild($rss);
+        echo $xml->saveXML();
+    }
+
+    /**
+     * Add the product data to the feed
+     * @param DOMDocument $xml
+     * @param DOMElement $channel
+     * @param array $products
+     */
+    private function parseProductData(DOMDocument $xml, DOMElement $channel, array $products)
+    {
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                // Create the new item node
+                $item = $xml->createElement('item');
+
+                // Simple product data
+                // @todo check if data exists and is not empty
+                $item->appendChild($xml->createElement('g:id', $product['product_code']));
+                $item->appendChild($xml->createElement('g:title', $product['product']));
+                $item->appendChild($xml->createElement('g:description', trim(strip_tags($product['short_description']))));
+                $item->appendChild($xml->createElement('g:link', $product['url']));
+                $item->appendChild($xml->createElement('g:image_link', $product['main_pair']['detailed']['image_path']));
+                $item->appendChild($xml->createElement('g:price', round($product['price'], 2) . ' EUR')); // @todo: hard coded EUR
+                $item->appendChild($xml->createElement('g:condition', 'new')); // @todo: hard coded
+                $item->appendChild($xml->createElement('g:brand', $this->getBrand($product)));
+
+                // More complex product data
+                // @todo
+
+                // Add the item to the feed
+                $channel->appendChild($item);
+            }
+        }
+    }
+
+    /**
+     * Get the brand of a product
+     * @param array $product
+     * @return string
+     */
+    private function getBrand(array $product): string
+    {
+        if (!empty($product['product_features'])) {
+            foreach ($product['product_features'] as $feature) {
+                if (!empty($feature['feature_type']) && $feature['feature_type'] === 'E') {
+                    $activeVariantId = $feature['variant_id'];
+                    return $feature['variants'][$activeVariantId]['variant'];
+                }
+            }
+        }
+
+        return '';
     }
 }
