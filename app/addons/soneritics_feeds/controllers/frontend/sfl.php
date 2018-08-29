@@ -58,7 +58,8 @@ if ($mode === 'show' && !empty($parserData)) {
             'get_additional' => true,
             'get_options' => true,
             'get_discounts' => true,
-            'get_features' => true
+            'get_features' => true,
+            'features_display_on' => 'A'
         ]
     );
 
