@@ -25,6 +25,7 @@
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 require_once __DIR__. '/parsers/IParser.php';
+require_once __DIR__. '/parsers/DebugSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/GoogleSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/BeslistSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/SoneriticsFeedParserFactory.php';
