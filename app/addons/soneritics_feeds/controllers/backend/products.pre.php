@@ -26,7 +26,7 @@
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 // Get the product ID
-$productId = (int)$_REQUEST['product_id'];
+$productId = (int)($_REQUEST['product_id'] ?? 0);
 
 // Controller for updating products
 if ($mode === 'update') {
