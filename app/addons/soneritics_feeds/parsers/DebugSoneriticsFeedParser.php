@@ -40,12 +40,15 @@ class DebugSoneriticsFeedParser implements ISoneriticsFeedParser
     /**
      * Parse the products into the feed
      * @param array $products
+     * @param SoneriticsFeedGlobalData $globalData
      * @param array $parserData
      * @return void
      */
-    public function parse(array $products, array $parserData = [])
+    public function parse(array $products, SoneriticsFeedGlobalData $globalData, array $parserData = [])
     {
         header('Content-type: text/plain');
+        print_r($globalData);
+        print_r($parserData);
         print_r($products);
         return;
     }

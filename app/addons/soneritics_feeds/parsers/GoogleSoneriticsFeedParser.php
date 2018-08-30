@@ -29,6 +29,11 @@
 class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
 {
     /**
+     * @var SoneriticsFeedGlobalData
+     */
+    private $globalData;
+
+    /**
      * Get the name of the parser
      * @return string
      */
@@ -40,11 +45,15 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
     /**
      * Parse the products into the feed
      * @param array $products
+     * @param SoneriticsFeedGlobalData $globalData
      * @param array $parserData
      * @return void
      */
-    public function parse(array $products, array $parserData = [])
+    public function parse(array $products, SoneriticsFeedGlobalData $globalData, array $parserData = [])
     {
+        // Set global data
+        $this->globalData = $globalData;
+
         // Send the XML content type header
         header('Content-type: application/xml');
 
@@ -65,7 +74,7 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
         $channel->appendChild($title);
 
         // Add the feed title to the channel info
-        $title = $xml->createElement('link', 'todo'); // @todo
+        $title = $xml->createElement('link', $globalData->getShopUrl());
         $channel->appendChild($title);
 
         // Add the feed description to the channel info
@@ -100,7 +109,7 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                     'g:description' => trim(strip_tags($product['short_description'])),
                     'g:link' => $product['url'],
                     'g:image_link' => $product['main_pair']['detailed']['image_path'],
-                    'g:price' => round($product['price'], 2) . ' EUR', // @todo: hard coded EUR
+                    'g:price' => round($product['price'], 2) . ' ' . $this->globalData->getCurrency()->getCode(),
                     'g:condition' => $this->getFeature($product, 'condition', 'new'),
                     'g:availability' => $product['amount'] > 0 ? 'in stock' : 'out of stock',
                     'g:brand' => $this->getBrand($product),

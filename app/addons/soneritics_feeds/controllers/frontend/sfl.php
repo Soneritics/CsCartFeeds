@@ -66,8 +66,13 @@ if ($mode === 'show' && !empty($parserData)) {
     // Get parser specific data
     $parserData = empty($data['data']) ? [] : json_decode($data['data'], true);
 
+    // Get global parser data
+    $globalData = (new SoneriticsFeedGlobalData)
+        ->setShopUrl('http://') // @todo
+        ->setCurrency(new SoneriticsFeedCurrency(fn_get_currencies()));
+
     // Parse and end the script
-    SoneriticsFeedParserFactory::getParserFromFilename($data['parser'])->parse($products, $parserData);
+    SoneriticsFeedParserFactory::getParserFromFilename($data['parser'])->parse($products, $globalData, $parserData);
     fn_flush();
     die;
 }

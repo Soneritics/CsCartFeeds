@@ -24,28 +24,53 @@
  */
 
 /**
- * Class BeslistSoneriticsFeedParser
+ * Class SoneriticsFeedGlobalData
  */
-class BeslistSoneriticsFeedParser implements ISoneriticsFeedParser
+class SoneriticsFeedGlobalData
 {
     /**
-     * Get the name of the parser
+     * @var string
+     */
+    private $shopUrl;
+
+    /**
+     * @var SoneriticsFeedCurrency
+     */
+    private $currency;
+
+    /**
      * @return string
      */
-    public static function getName(): string
+    public function getShopUrl(): string
     {
-        return 'Beslist';
+        return $this->shopUrl;
     }
 
     /**
-     * Parse the products into the feed
-     * @param array $products
-     * @param SoneriticsFeedGlobalData $globalData
-     * @param array $parserData
-     * @return void
+     * @param string $shopUrl
+     * @return SoneriticsFeedGlobalData
      */
-    public function parse(array $products, SoneriticsFeedGlobalData $globalData, array $parserData = [])
+    public function setShopUrl(string $shopUrl): SoneriticsFeedGlobalData
     {
-        // TODO: Implement parse() method.
+        $this->shopUrl = $shopUrl;
+        return $this;
+    }
+
+    /**
+     * @return SoneriticsFeedCurrency
+     */
+    public function getCurrency(): SoneriticsFeedCurrency
+    {
+        return $this->currency;
+    }
+
+    /**
+     * @param SoneriticsFeedCurrency $currency
+     * @return SoneriticsFeedGlobalData
+     */
+    public function setCurrency(SoneriticsFeedCurrency $currency): SoneriticsFeedGlobalData
+    {
+        $this->currency = $currency;
+        return $this;
     }
 }
