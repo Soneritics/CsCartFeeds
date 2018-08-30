@@ -56,22 +56,24 @@ if ($mode === 'manage') {
     if (!empty($_POST)) {
         if (empty($feedId)) {
             db_query(
-                "INSERT INTO ?:soneritics_feeds(company_id, lang_code, `name`, parser) VALUES(?i, ?s, ?s, ?s)",
+                "INSERT INTO ?:soneritics_feeds(company_id, lang_code, `name`, parser, `data`) VALUES(?i, ?s, ?s, ?s, ?s)",
                 $_POST['soneriticsFeed']['company_id'],
                 $_POST['soneriticsFeed']['lang_code'],
                 $_POST['soneriticsFeed']['name'],
-                $_POST['soneriticsFeed']['parser']
+                $_POST['soneriticsFeed']['parser'],
+                json_encode($_POST['soneriticsFeed']['data'] ?? [])
             );
 
             $lastInsertId = (int)db_get_field('SELECT LAST_INSERT_ID()');
             return array(CONTROLLER_STATUS_OK, 'soneritics_feeds.update?soneritics_feed_id=' . $lastInsertId);
         } else {
             db_query(
-                "UPDATE ?:soneritics_feeds SET company_id = ?i, lang_code = ?s, `name` = ?s, parser = ?s WHERE id = ?i",
+                "UPDATE ?:soneritics_feeds SET company_id = ?i, lang_code = ?s, `name` = ?s, parser = ?s, `data` = ?s WHERE id = ?i",
                 $_POST['soneriticsFeed']['company_id'],
                 $_POST['soneriticsFeed']['lang_code'],
                 $_POST['soneriticsFeed']['name'],
                 $_POST['soneriticsFeed']['parser'],
+                json_encode($_POST['soneriticsFeed']['data'] ?? []),
                 $feedId
             );
         }
@@ -80,6 +82,9 @@ if ($mode === 'manage') {
     // Additional data to an existing item
     $soneriticsFeed = db_get_array("SELECT * FROM ?:soneritics_feeds WHERE id = ?i", $feedId);
     if (!empty($soneriticsFeed)) {
+        $soneriticsFeed[0]['data'] =
+            empty($soneriticsFeed[0]['data']) ? [] : json_decode($soneriticsFeed[0]['data'], true);
+
         Tygh::$app['view']->assign('soneriticsFeed', $soneriticsFeed[0]);
     }
 }

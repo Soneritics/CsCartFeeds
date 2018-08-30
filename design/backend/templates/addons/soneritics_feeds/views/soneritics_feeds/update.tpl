@@ -31,12 +31,19 @@
                     <div class="control-group{if count($list) === 1} hidden{/if}">
                         <label class="control-label">{__("Addon:{$i}")}:</label>
                         <div class="controls">
-                            <select name="soneriticsFeed[{$i}]">
+                            <select name="soneriticsFeed[{$i}]" id="select-parser-{$i}">
                                 {foreach from=$list item=v key=k}
                                     <option value="{$k}" {if $k == $soneriticsFeed[$i]}selected="selected"{/if}>{$v}</option>
                                 {/foreach}
                             </select>
                         </div>
+                    </div>
+                {/foreach}
+
+                {foreach from=$parsers item=parser}
+                    <div id="parserdata-{$parser}" class="parser-extradata hidden">
+                        {assign var=hookName value=strtolower("parser:$parser")}
+                        {hook name=$hookName}{/hook}
                     </div>
                 {/foreach}
             </fieldset>
@@ -46,6 +53,21 @@
             {include file="buttons/save_cancel.tpl" hide_second_button=true but_name="dispatch[soneritics_feeds.update]" but_role="submit-link" but_target_form="feed_update_form" save=$id}
         {/capture}
     </form>
+
+    {literal}
+    <script>
+        var showChosenParser = function() {
+            $('.parser-extradata').addClass('hidden');
+            var activeParser = $('#select-parser-parser').children('option:selected').text();
+            $('#parserdata-' + activeParser).removeClass('hidden');
+        };
+
+        $(function() {
+            $('#select-parser-parser').on('change', showChosenParser);
+            showChosenParser();
+        });
+    </script>
+    {/literal}
 {/capture}
 
 {include file="common/mainbox.tpl" title=$button_caption content=$smarty.capture.mainbox buttons=$smarty.capture.buttons}
