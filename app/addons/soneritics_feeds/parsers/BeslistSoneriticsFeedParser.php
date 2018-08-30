@@ -40,9 +40,10 @@ class BeslistSoneriticsFeedParser implements ISoneriticsFeedParser
     /**
      * Parse the products into the feed
      * @param array $products
+     * @param array $parserData
      * @return void
      */
-    public function parse(array $products)
+    public function parse(array $products, array $parserData = [])
     {
         // TODO: Implement parse() method.
     }

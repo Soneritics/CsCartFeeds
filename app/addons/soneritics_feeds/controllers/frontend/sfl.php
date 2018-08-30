@@ -63,8 +63,11 @@ if ($mode === 'show' && !empty($parserData)) {
         ]
     );
 
+    // Get parser specific data
+    $parserData = empty($data['data']) ? [] : json_decode($data['data'], true);
+
     // Parse and end the script
-    SoneriticsFeedParserFactory::getParserFromFilename($data['parser'])->parse($products);
+    SoneriticsFeedParserFactory::getParserFromFilename($data['parser'])->parse($products, $parserData);
     fn_flush();
     die;
 }

@@ -37,7 +37,8 @@ interface ISoneriticsFeedParser
     /**
      * Parse the products into the feed
      * @param array $products
+     * @param array $parserData
      * @return void
      */
-    public function parse(array $products);
+    public function parse(array $products, array $parserData = []);
 }

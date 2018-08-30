@@ -40,9 +40,10 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
     /**
      * Parse the products into the feed
      * @param array $products
+     * @param array $parserData
      * @return void
      */
-    public function parse(array $products)
+    public function parse(array $products, array $parserData = [])
     {
         // Send the XML content type header
         header('Content-type: application/xml');
@@ -68,7 +69,7 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
         $channel->appendChild($title);
 
         // Add the feed description to the channel info
-        $description = $xml->createElement('description', 'Google feed'); // @todo
+        $description = $xml->createElement('description', $parserData['description']);
         $channel->appendChild($description);
 
         // Add the products
