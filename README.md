@@ -1,6 +1,15 @@
 # CsCartFeeds
 Data feeds for Cs Cart
 
+## Shipment cost per product
+Most feeds require shipment cost. The default shipment cost cannot be used.
+To set the feed shipment cost, add the following product features:
+* Shipment cost {COUNTRY_CODE}
+
+_COUNTRY_CODE_ is the 2 character code of the country. RU, EN, NL, DE, etc.
+Use _Other_ > _Text_ as the feature type.
+
+
 ## Using the Google Data Feed
 The Google data feed requires some extra information.
 You must add these as product features.

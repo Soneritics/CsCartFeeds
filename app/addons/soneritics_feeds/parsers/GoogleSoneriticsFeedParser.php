@@ -125,6 +125,9 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                     }
                 }
 
+                // Set the shipments from the features
+                $this->setShipments($product, $xml, $item);
+
                 // Add the item to the feed
                 $channel->appendChild($item);
             }
@@ -171,5 +174,34 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
         }
 
         return $default;
+    }
+
+    /**
+     * Set the shipments based on the values of the features
+     * @param array $product
+     * @param DOMDocument $xml
+     * @param DOMElement $item
+     */
+    private function setShipments(array $product, DOMDocument $xml, DOMElement $item)
+    {
+        $featureName = 'shipment cost ';
+        if (!empty($product['product_features'])) {
+            foreach ($product['product_features'] as $productFeature) {
+                $hasValue = !empty($productFeature['value']);
+                $descriptionMatches = !empty($productFeature['description']) &&
+                    substr(strtolower($productFeature['description']), 0, strlen($featureName)) === $featureName;
+
+                if ($descriptionMatches) {
+                    $shipmentCountry = strtoupper(substr($productFeature['description'], strlen($featureName)));
+                    $shipmentCost = $productFeature['value'];
+
+                    $shippingItem = $xml->createElement('g:shipping');
+                    $shippingItem->appendChild($xml->createElement('g:country', $shipmentCountry));
+                    $shippingItem->appendChild($xml->createElement('g:service', 'Standard'));
+                    $shippingItem->appendChild($xml->createElement('g:price', $shipmentCost));
+                    $item->appendChild($shippingItem);
+                }
+            }
+        }
     }
 }
