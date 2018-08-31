@@ -66,9 +66,15 @@ if ($mode === 'show' && !empty($parserData)) {
     // Get parser specific data
     $parserData = empty($data['data']) ? [] : json_decode($data['data'], true);
 
+    // Get shop URL
+    $companyData = fn_get_company_data($data['company_id'], $data['lang_code']);
+    $shopUrl = empty($companyData['secure_storefront']) ?
+        'http://' . $companyData['storefront'] :
+        'https://' . $companyData['secure_storefront'];
+
     // Get global parser data
     $globalData = (new SoneriticsFeedGlobalData)
-        ->setShopUrl('http://') // @todo
+        ->setShopUrl($shopUrl)
         ->setCurrency(new SoneriticsFeedCurrency(fn_get_currencies()));
 
     // Parse and end the script
