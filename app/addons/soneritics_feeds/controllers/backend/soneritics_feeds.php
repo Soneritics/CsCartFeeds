@@ -99,14 +99,33 @@ if ($mode === 'manage') {
         return [CONTROLLER_STATUS_REDIRECT, 'soneritics_feeds.manage'];
     }
 
-    // @todo: Save
+    // Save the data, if POSTed
+    if (!empty($_POST)) {
+        $allProductsShownOnPage = $_POST['all_products'];
+        $activeProducts = $_POST['active_products'];
 
+        // Remove all the products that were shown on the page
+        db_query("DELETE FROM ?:soneritics_feed_products WHERE feed_id = ?i AND product_id IN(?a)", $feedId, $allProductsShownOnPage);
+
+        // Add the selected products to the database
+        if (!empty($activeProducts)) {
+            foreach ($activeProducts as $activeProduct) {
+                db_query("INSERT INTO ?:soneritics_feed_products(feed_id, product_id) VALUES(?i, ?i)", $feedId, (int)$activeProduct);
+            }
+        }
+    }
+
+    // Get the data for the view
     $page = empty($_GET['page']) ? 0 : (int)$_GET['page'];
     list($products, $search) = fn_get_products(['page' => $page], \Tygh\Registry::get('settings.Appearance.admin_elements_per_page'));
     fn_gather_additional_products_data($products, ['get_icon' => true, 'get_detailed' => true]);
 
+    // Get active products for this feed
+    $activeProducts = db_get_fields('SELECT product_id FROM ?:soneritics_feed_products WHERE feed_id = ?i', $feedId);
+
     Tygh::$app['view']->assign('products', $products);
     Tygh::$app['view']->assign('search', $search);
+    Tygh::$app['view']->assign('activeProducts', $activeProducts);
 }
 
 // Global view vars
