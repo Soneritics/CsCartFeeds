@@ -1,5 +1,12 @@
 # CsCartFeeds
-Data feeds for Cs Cart
+Data feeds for Cs Cart.
+This data feed plugin is not as flexible as many others, but it is way more easy to use.
+This plugin lets you add predefined feeds in predefined formats.
+Adding an extra feed requires coding.
+
+The following feeds have been implemented:
+* [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589) 
+
 
 ## Shipment cost per product
 Most feeds require shipment cost. The default shipment cost cannot be used.
@@ -26,3 +33,14 @@ Either the _gtin_ or _mpn_ field must be filled to have valid product feed data.
 Optional, you can add the feature _condition_.
 If you choose not to use this, all products will be given the _new_ condition.
 If you also want to include _used_ items,this feature is mandatory.
+
+## Screenshots
+Data feeds overview
+![Data feed overview](.README/screenshot-01.png "Data feeds overview")
+
+Data feed settings
+![Data feed settings](.README/screenshot-02.png "Data feeds settings")
+
+Data feed integration in products pages
+![Data feeds product page integration](.README/screenshot-03.png "Data feeds product page integration")
+
