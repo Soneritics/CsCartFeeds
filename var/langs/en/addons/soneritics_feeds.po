@@ -18,7 +18,35 @@ msgctxt "Languages::soneritics_feeds"
 msgid "Data feeds"
 msgstr "Data feeds"
 
-msgctxt "Languages::addons.soneritics_feeds.example"
-msgid "Example"
-msgstr "Example"
+msgctxt "Languages::addons.soneritics_feeds.parser"
+msgid "Parser"
+msgstr "Parser"
+
+msgctxt "Languages::addons.soneritics_feeds.global.parser"
+msgid "Parser"
+msgstr "Parser"
+
+msgctxt "Languages::addons.soneritics_feeds.global.lang_code"
+msgid "Language"
+msgstr "Language"
+
+msgctxt "Languages::addons.soneritics_feeds.global.company_id"
+msgid "Company"
+msgstr "Company"
+
+msgctxt "Languages::addons.soneritics_feeds.manage.sidebar"
+msgid "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
+msgstr "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
+
+msgctxt "Languages::addons.soneritics_feeds.products.sidebar"
+msgid "This is the complete product overview. Select the products that must be included in the feed here. Be aware that feed specific settings for the product must be set right."
+msgstr "This is the complete product overview. Select the products that must be included in the feed here. Be aware that feed specific settings for the product must be set right."
+
+msgctxt "Languages::addons.soneritics_feeds.update.sidebar"
+msgid "You can change feed specific settings here."
+msgstr "You can change feed specific settings here."
+
+msgctxt "Languages::addons.soneritics_feeds.add.sidebar"
+msgid "You can add a new feed here."
+msgstr "You can add a new feed here."
 

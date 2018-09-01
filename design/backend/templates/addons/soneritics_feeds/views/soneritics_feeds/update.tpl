@@ -3,14 +3,14 @@
     {assign var="button_caption" value=__('update')}
 
     {notes title=__("notice")}
-        <p>Instructies voor het updaten</p>
+        <p>{__("addons.soneritics_feeds.update.sidebar")}</p>
     {/notes}
 {else}
     {assign var="id" value=0}
     {assign var="button_caption" value=__('add')}
 
     {notes title=__("notice")}
-        <p>Instructies voor het toevoegen</p>
+        <p>{__("addons.soneritics_feeds.add.sidebar")}</p>
     {/notes}
 {/if}
 
@@ -29,7 +29,7 @@
 
                 {foreach from=['lang_code' => $langs, 'company_id' => $companies, 'parser' => $parsers] key=i item=list}
                     <div class="control-group{if count($list) === 1} hidden{/if}">
-                        <label class="control-label">{__("Addon:{$i}")}:</label>
+                        <label class="control-label">{__("addons.soneritics_feeds.global.{$i}")}:</label>
                         <div class="controls">
                             <select name="soneriticsFeed[{$i}]" id="select-parser-{$i}">
                                 {foreach from=$list item=v key=k}

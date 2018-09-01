@@ -1,6 +1,6 @@
 {capture name="sidebar"}
     {notes title=__("notice")}
-        <p>Mogelijk hier nog wat informatie ofzo</p>
+        <p>{__("addons.soneritics_feeds.products.sidebar")}</p>
     {/notes}
 {/capture}
 

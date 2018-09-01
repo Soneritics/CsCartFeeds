@@ -1,6 +1,6 @@
 {hook name="data_feeds:notice"}
 {notes title=__("notice")}
-    <p>Mogelijk hier nog wat informatie ofzo</p>
+    <p>{__('addons.soneritics_feeds.manage.sidebar')}</p>
 {/notes}
 {/hook}
 
@@ -11,7 +11,7 @@
                 <thead>
                     <tr>
                         <th width="39%" class="nowrap">{__("name")}</th>
-                        <th width="25%" class="nowrap">{__("parser")}</th>
+                        <th width="25%" class="nowrap">{__("addons.soneritics_feeds.parser")}</th>
                         <th width="30%" class="nowrap">{__("company")}</th>
                         <th width="10%" class="nowrap">{__("language")}</th>
                         <th width="1%" class="nowrap">&nbsp;</th>

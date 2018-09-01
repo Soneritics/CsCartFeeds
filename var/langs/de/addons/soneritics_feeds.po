@@ -22,3 +22,35 @@ msgctxt "Languages::addons.soneritics_feeds.example"
 msgid "Example"
 msgstr "Beispiel"
 
+msgctxt "Languages::addons.soneritics_feeds.parser"
+msgid "Parser"
+msgstr "Parser"
+
+msgctxt "Languages::addons.soneritics_feeds.global.parser"
+msgid "Parser"
+msgstr "Parser"
+
+msgctxt "Languages::addons.soneritics_feeds.global.lang_code"
+msgid "Language"
+msgstr "Sprache"
+
+msgctxt "Languages::addons.soneritics_feeds.global.company_id"
+msgid "Company"
+msgstr "Unternehmen"
+
+msgctxt "Languages::addons.soneritics_feeds.manage.sidebar"
+msgid "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
+msgstr "Dies ist die aktive Datenfeed-Übersicht. Auf dieser Seite können Sie Feeds hinzufügen, deren Einstellungen verwalten und löschen. Außerdem kann die direkte Verbindung zum Feed geöffnet werden. Dieser Link muss bei der Installation des Feeds angegeben werden."
+
+msgctxt "Languages::addons.soneritics_feeds.products.sidebar"
+msgid "This is the complete product overview. Select the products that must be included in the feed here. Be aware that feed specific settings for the product must be set right."
+msgstr "Dies ist die komplette Produktübersicht. Wählen Sie hier die Produkte aus, die im Feed enthalten sein müssen. Beachten Sie, dass feedspezifische Einstellungen für das Produkt richtig eingestellt sein müssen."
+
+msgctxt "Languages::addons.soneritics_feeds.update.sidebar"
+msgid "You can change feed specific settings here."
+msgstr "Sie können die Feed-spezifischen Einstellungen hier ändern."
+
+msgctxt "Languages::addons.soneritics_feeds.add.sidebar"
+msgid "You can add a new feed here."
+msgstr "Sie können hier einen neuen Feed hinzufügen."
+
