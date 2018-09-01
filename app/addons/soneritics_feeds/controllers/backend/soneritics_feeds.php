@@ -87,6 +87,26 @@ if ($mode === 'manage') {
 
         Tygh::$app['view']->assign('soneriticsFeed', $soneriticsFeed[0]);
     }
+
+/*******************************************************************/
+//                      UPDATE FEED SETTINGS                       //
+/*******************************************************************/
+} elseif ($mode === 'products') {
+    $feedId = empty($_GET['soneritics_feed_id']) ? 0 : (int)$_GET['soneritics_feed_id'];
+
+    // If the feed ID is not set, no data can be shown and the user will be redirected to the feed overview
+    if ($feedId === 0 || (int)db_get_field("SELECT COUNT(id) FROM ?:soneritics_feeds WHERE id = ?i", $feedId) === 0) {
+        return [CONTROLLER_STATUS_REDIRECT, 'soneritics_feeds.manage'];
+    }
+
+    // @todo: Save
+
+    $page = empty($_GET['page']) ? 0 : (int)$_GET['page'];
+    list($products, $search) = fn_get_products(['page' => $page], \Tygh\Registry::get('settings.Appearance.admin_elements_per_page'));
+    fn_gather_additional_products_data($products, ['get_icon' => true, 'get_detailed' => true]);
+
+    Tygh::$app['view']->assign('products', $products);
+    Tygh::$app['view']->assign('search', $search);
 }
 
 // Global view vars
