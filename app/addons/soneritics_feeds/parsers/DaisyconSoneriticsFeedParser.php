@@ -29,6 +29,11 @@
 class DaisyconSoneriticsFeedParser implements ISoneriticsFeedParser
 {
     /**
+     * @var SoneriticsFeedGlobalData
+     */
+    private $globalData;
+
+    /**
      * Get the name of the parser
      * @return string
      */
@@ -46,6 +51,41 @@ class DaisyconSoneriticsFeedParser implements ISoneriticsFeedParser
      */
     public function parse(array $products, SoneriticsFeedGlobalData $globalData, array $parserData = [])
     {
-        // TODO: Implement parse() method.
+        // Set global data
+        $this->globalData = $globalData;
+
+        // Send the XML content type header
+        header('Content-type: application/xml');
+
+        // Create the XML header
+        $xml = new DOMDocument('1.0', 'UTF-8');
+
+        // Create the RSS root node
+        $rss = $xml->createElement("rss");
+        $rss->setAttribute('version', '2.0');
+        $rss->setAttribute('xmlns:g', 'http://base.google.com/ns/1.0');
+
+        // Add the channel node to the RSS node
+        $channel = $xml->createElement('channel');
+        $rss->appendChild($channel);
+
+        // Add the feed title to the channel info
+        $title = $xml->createElement('title', 'Google feed');
+        $channel->appendChild($title);
+
+        // Add the feed title to the channel info
+        $title = $xml->createElement('link', $globalData->getShopUrl());
+        $channel->appendChild($title);
+
+        // Add the feed description to the channel info
+        $description = $xml->createElement('description', $parserData['description']);
+        $channel->appendChild($description);
+
+        // Add the products
+        $this->parseProductData($xml, $channel, $products);
+
+        // Show the XML content
+        $xml->appendChild($rss);
+        echo $xml->saveXML();
     }
 }
