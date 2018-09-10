@@ -70,7 +70,7 @@ class DaisyconSoneriticsFeedParser implements ISoneriticsFeedParser
         $rss->appendChild($channel);
 
         // Add the feed title to the channel info
-        $title = $xml->createElement('title', 'Google feed');
+        $title = $xml->createElement('title', 'Daisycon feed');
         $channel->appendChild($title);
 
         // Add the feed title to the channel info
@@ -78,7 +78,7 @@ class DaisyconSoneriticsFeedParser implements ISoneriticsFeedParser
         $channel->appendChild($title);
 
         // Add the feed description to the channel info
-        $description = $xml->createElement('description', $parserData['description']);
+        $description = $xml->createElement('description', $parserData['daisycon_description']);
         $channel->appendChild($description);
 
         // Add the products
@@ -87,5 +87,123 @@ class DaisyconSoneriticsFeedParser implements ISoneriticsFeedParser
         // Show the XML content
         $xml->appendChild($rss);
         echo $xml->saveXML();
+    }
+
+    /**
+     * Add the product data to the feed
+     * @param DOMDocument $xml
+     * @param DOMElement $channel
+     * @param array $products
+     */
+    private function parseProductData(DOMDocument $xml, DOMElement $channel, array $products)
+    {
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                // Create the new item node
+                $item = $xml->createElement('item');
+
+                // Product data
+                $productData = [
+                    'sku' => $product['product_code'],
+                    'title' => $product['product'],
+                    'description' => trim(strip_tags($product['short_description'])),
+                    'link' => $product['url'],
+                    'image_link' => $product['main_pair']['detailed']['image_path'],
+                    'price' => round($product['price'], 2) . ' ' . $this->globalData->getCurrency()->getCode(),
+                    'condition' => $this->getFeature($product, 'condition', 'new'),
+                    'in_stock' => $product['amount'] > 0 ? 'true' : 'false',
+                    'brand' => $this->getBrand($product),
+                    'gtin' => $this->getFeature($product, 'gtin'),
+                    'google_category_id' => $this->getFeature($product, 'google product category'),
+                    'product_type' => $this->getFeature($product, 'google product type'),
+                ];
+
+                foreach ($productData as $k => $v) {
+                    if (!empty($v)) {
+                        $item->appendChild($xml->createElement($k, $v));
+                    }
+                }
+
+                // Set the shipments from the features
+                $this->setShipment($product, $xml, $item);
+
+                // Add the item to the feed
+                $channel->appendChild($item);
+            }
+        }
+    }
+
+    /**
+     * Get the brand of a product
+     * @param array $product
+     * @return string
+     */
+    private function getBrand(array $product): string
+    {
+        if (!empty($product['product_features'])) {
+            foreach ($product['product_features'] as $feature) {
+                if (!empty($feature['feature_type']) && $feature['feature_type'] === 'E') {
+                    $activeVariantId = $feature['variant_id'];
+                    return $feature['variants'][$activeVariantId]['variant'];
+                }
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Get a specific feature value
+     * @param array $product
+     * @param string $feature
+     * @param string $default
+     * @return string
+     */
+    private function getFeature(array $product, string $feature, string $default = ''): string
+    {
+        if (!empty($product['product_features'])) {
+            foreach ($product['product_features'] as $productFeature) {
+                if (
+                    !empty($productFeature['description']) &&
+                    strtolower($productFeature['description']) === strtolower($feature)
+                ) {
+                    return $productFeature['value'];
+                }
+            }
+        }
+
+        return $default;
+    }
+
+    /**
+     * Set the shipments based on the values of the features
+     * @param array $product
+     * @param DOMDocument $xml
+     * @param DOMElement $item
+     */
+    private function setShipment(array $product, DOMDocument $xml, DOMElement $item)
+    {
+        $minShipmentCost = 0;
+
+        $featureName = 'shipment cost ';
+        if (!empty($product['product_features'])) {
+            foreach ($product['product_features'] as $productFeature) {
+                $hasValue = !empty($productFeature['value']);
+                $descriptionMatches = !empty($productFeature['description']) &&
+                    substr(strtolower($productFeature['description']), 0, strlen($featureName)) === $featureName;
+
+                if ($descriptionMatches) {
+                    $shipmentCost = $productFeature['value'];
+
+                    if ($shipmentCost < $minShipmentCost) {
+                        $minShipmentCost = $shipmentCost;
+                    }
+                }
+            }
+        }
+
+        if ($minShipmentCost > 0) {
+            $item->appendChild($xml->createElement('price_shipping', $minShipmentCost));
+        }
     }
 }
