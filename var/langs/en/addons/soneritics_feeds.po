@@ -50,3 +50,19 @@ msgctxt "Languages::addons.soneritics_feeds.add.sidebar"
 msgid "You can add a new feed here."
 msgstr "You can add a new feed here."
 
+msgctxt "Languages::addons.soneritics_feeds.beslist.stock_nl"
+msgid "In stock NL"
+msgstr "In stock NL"
+
+msgctxt "Languages::addons.soneritics_feeds.beslist.stock_be"
+msgid "In stock BE"
+msgstr "In stock BE"
+
+msgctxt "Languages::addons.soneritics_feeds.beslist.not_in_stock_nl"
+msgid "Not in stock NL"
+msgstr "Not in stock NL"
+
+msgctxt "Languages::addons.soneritics_feeds.beslist.not_in_stock_be"
+msgid "Not in stock BE"
+msgstr "Not in stock BE"
+

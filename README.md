@@ -6,6 +6,8 @@ Adding an extra feed requires coding.
 
 The following feeds have been implemented:
 * [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589) 
+* Daisycon
+* Beslist
 
 
 ## Shipment cost per product
@@ -33,6 +35,15 @@ Either the _gtin_ or _mpn_ field must be filled to have valid product feed data.
 Optional, you can add the feature _condition_.
 If you choose not to use this, all products will be given the _new_ condition.
 If you also want to include _used_ items,this feature is mandatory.
+
+## Using the Beslist Data Feed
+The Beslist data feed requires some extra information.
+You must add these as product features.
+
+To use the Beslist feed, add the following features (as text features)
+and use the description exactly listed below (case insensitive):
+* ean
+* beslist category
 
 ## Screenshots
 Data feeds overview
