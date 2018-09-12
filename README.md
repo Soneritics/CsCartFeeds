@@ -9,6 +9,7 @@ The following feeds have been implemented:
 * [Daisycon](https://faq-advertiser.daisycon.com/hc/nl/articles/115000721785-Hoe-moet-ik-als-adverteerder-een-productfeed-aanleveren-)
 * [Beslist](http://cl.beslist.nl/pdf/Productfeed-handleiding%20voor%20Pro%20Shops%20NL.pdf)
 * LeGuide
+* []Tweakers](https://docplayer.nl/16731720-Tweakers-pricewatch-specificaties-productfeed.html)
 
 
 ## Shipment cost per product
@@ -58,6 +59,17 @@ and use the description exactly listed below (case insensitive):
 * leguide category
 * leguide levertijd
 * leguide garantie
+
+
+## Using the Tweakers Data Feed
+The Tweakers data feed requires some extra information.
+You must add these as product features.
+
+To use the Tweakers feed, add the following features (as text features)
+and use the description exactly listed below (case insensitive):
+* ean
+* tweakers category
+* tweakers subcategory
 
 
 ## Screenshots
