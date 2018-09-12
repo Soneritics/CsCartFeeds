@@ -6,8 +6,8 @@ Adding an extra feed requires coding.
 
 The following feeds have been implemented:
 * [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589) 
-* Daisycon
-* Beslist
+* [Daisycon](https://faq-advertiser.daisycon.com/hc/nl/articles/115000721785-Hoe-moet-ik-als-adverteerder-een-productfeed-aanleveren-)
+* [Beslist](http://cl.beslist.nl/pdf/Productfeed-handleiding%20voor%20Pro%20Shops%20NL.pdf)
 
 
 ## Shipment cost per product
