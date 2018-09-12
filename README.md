@@ -8,6 +8,7 @@ The following feeds have been implemented:
 * [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589) 
 * [Daisycon](https://faq-advertiser.daisycon.com/hc/nl/articles/115000721785-Hoe-moet-ik-als-adverteerder-een-productfeed-aanleveren-)
 * [Beslist](http://cl.beslist.nl/pdf/Productfeed-handleiding%20voor%20Pro%20Shops%20NL.pdf)
+* LeGuide
 
 
 ## Shipment cost per product
@@ -36,6 +37,7 @@ Optional, you can add the feature _condition_.
 If you choose not to use this, all products will be given the _new_ condition.
 If you also want to include _used_ items,this feature is mandatory.
 
+
 ## Using the Beslist Data Feed
 The Beslist data feed requires some extra information.
 You must add these as product features.
@@ -44,6 +46,19 @@ To use the Beslist feed, add the following features (as text features)
 and use the description exactly listed below (case insensitive):
 * ean
 * beslist category
+
+
+## Using the LeGuide Data Feed
+The LeGuide data feed requires some extra information.
+You must add these as product features.
+
+To use the LeGuide feed, add the following features (as text features)
+and use the description exactly listed below (case insensitive):
+* ean
+* leguide category
+* leguide levertijd
+* leguide garantie
+
 
 ## Screenshots
 Data feeds overview
