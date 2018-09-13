@@ -9,7 +9,8 @@ The following feeds have been implemented:
 * [Daisycon](https://faq-advertiser.daisycon.com/hc/nl/articles/115000721785-Hoe-moet-ik-als-adverteerder-een-productfeed-aanleveren-)
 * [Beslist](http://cl.beslist.nl/pdf/Productfeed-handleiding%20voor%20Pro%20Shops%20NL.pdf)
 * LeGuide
-* []Tweakers](https://docplayer.nl/16731720-Tweakers-pricewatch-specificaties-productfeed.html)
+* [Tweakers](https://docplayer.nl/16731720-Tweakers-pricewatch-specificaties-productfeed.html)
+* [Vergelijk](https://www.vergelijk.nl/info/partnerpagina/)
 
 
 ## Shipment cost per product
@@ -70,6 +71,19 @@ and use the description exactly listed below (case insensitive):
 * ean
 * tweakers category
 * tweakers subcategory
+
+
+## Using the Vergelijk Data Feed
+The Vergelijk data feed requires some extra information.
+You must add these as product features.
+
+To use the Vergelijk feed, add the following features (as text features)
+and use the description exactly listed below (case insensitive):
+* ean
+* vergelijk category
+* vergelijk subcategory
+* vergelijk delivery period
+
 
 
 ## Screenshots
