@@ -11,6 +11,7 @@ The following feeds have been implemented:
 * LeGuide
 * [Tweakers](https://docplayer.nl/16731720-Tweakers-pricewatch-specificaties-productfeed.html)
 * [Vergelijk](https://www.vergelijk.nl/info/partnerpagina/)
+* [Kieskeurig](https://www.kieskeurig.nl/pricefeed)
 
 
 ## Shipment cost per product
@@ -84,6 +85,17 @@ and use the description exactly listed below (case insensitive):
 * vergelijk subcategory
 * vergelijk delivery period
 
+
+## Using the Kieskeurig Data Feed
+The Kieskeurig data feed requires some extra information.
+You must add these as product features.
+
+To use the Kieskeurig feed, add the following features (as text features)
+and use the description exactly listed below (case insensitive):
+* ean
+* kieskeurig productgroep
+* kieskeurig levertijd
+* kieskeurig type
 
 
 ## Screenshots
