@@ -193,7 +193,7 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
 
                 if ($descriptionMatches) {
                     $shipmentCountry = strtoupper(substr($productFeature['description'], strlen($featureName)));
-                    $shipmentCost = $productFeature['value'];
+                    $shipmentCost = round($productFeature['value'], 2) . ' ' . $this->globalData->getCurrency()->getCode();
 
                     $shippingItem = $xml->createElement('g:shipping');
                     $shippingItem->appendChild($xml->createElement('g:country', $shipmentCountry));
