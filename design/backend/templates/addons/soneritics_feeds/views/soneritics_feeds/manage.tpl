@@ -28,6 +28,8 @@
                             {capture name="tools_list"}
                                 <li>{btn type="list" text=__("link") href="index.php?dispatch=sfl.show&id=`$feed.id`" target="_blank"}</li>
                                 <li class="divider"></li>
+                                <li>{btn type="list" text=__("addons.soneritics_feeds.manage.incomplete_products") href="soneritics_feeds.incomplete_products?soneritics_feed_id=`$feed.id`"}</li>
+                                <li class="divider"></li>
                                 <li>{btn type="list" text=__("edit") href="soneritics_feeds.update?soneritics_feed_id=`$feed.id`"}</li>
                                 <li>{btn type="list" text=__("delete") href="soneritics_feeds.delete?soneritics_feed_id=`$feed.id`"}</li>
                             {/capture}

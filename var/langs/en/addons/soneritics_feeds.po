@@ -38,6 +38,14 @@ msgctxt "Languages::addons.soneritics_feeds.manage.sidebar"
 msgid "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
 msgstr "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
 
+msgctxt "Languages::addons.soneritics_feeds.manage.incomplete_products"
+msgid "Incomplete products"
+msgstr "Incomplete products"
+
+msgctxt "Languages::addons.soneritics_feeds.incomplete_products.sidebar"
+msgid "This is the overview of products that have properties that have not yet been filed (correctly) to be shown in the feed."
+msgstr "This is the overview of products that have properties that have not yet been filed (correctly) to be shown in the feed."
+
 msgctxt "Languages::addons.soneritics_feeds.products.sidebar"
 msgid "This is the complete product overview. Select the products that must be included in the feed here. Be aware that feed specific settings for the product must be set right."
 msgstr "This is the complete product overview. Select the products that must be included in the feed here. Be aware that feed specific settings for the product must be set right."

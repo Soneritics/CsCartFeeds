@@ -42,4 +42,13 @@ interface ISoneriticsFeedParser
      * @return void
      */
     public function parse(array $products, SoneriticsFeedGlobalData $globalData, array $parserData = []);
+
+    /**
+     * Get the invalid products in a feed. These are the products that have missing info.
+     * @param array $products
+     * @param SoneriticsFeedGlobalData $globalData
+     * @param array $parserData
+     * @return array
+     */
+    public function getInvalidProductIds(array $products, SoneriticsFeedGlobalData $globalData, array $parserData = []) : array;
 }

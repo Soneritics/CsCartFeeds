@@ -78,6 +78,40 @@ class VergelijkSoneriticsFeedParser implements ISoneriticsFeedParser
     }
 
     /**
+     * Get the invalid products in a feed. These are the products that have missing info.
+     * @param array $products
+     * @param SoneriticsFeedGlobalData $globalData
+     * @param array $parserData
+     * @return array
+     */
+    public function getInvalidProductIds(
+        array $products,
+        SoneriticsFeedGlobalData $globalData,
+        array $parserData = []
+    ): array {
+        $result = [];
+
+        if (!empty($products)) {
+            foreach ($products as $product) {
+                $check = [
+                    $this->getFeature($product, 'ean'),
+                    $this->getFeature($product, 'vergelijk category'),
+                    $this->getFeature($product, 'vergelijk subcategory'),
+                    $this->getFeature($product, 'vergelijk delivery period')
+                ];
+
+                foreach ($check as $checkItem) {
+                    if (empty($checkItem)) {
+                        $result[$product['product_id']] = $product['product_id'];
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Add the product data to the feed
      * @param DOMDocument $xml
      * @param DOMElement $productsRoot
