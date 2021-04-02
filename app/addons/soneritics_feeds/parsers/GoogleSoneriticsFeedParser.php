@@ -153,6 +153,12 @@ class GoogleSoneriticsFeedParser implements ISoneriticsFeedParser
                     'g:product_type' => $this->getFeature($product, 'google product type'),
                 ];
 
+                if (!empty($productData['g:gtin']) &&
+                    !empty($productData['g:mpn']) &&
+                    $productData['g:gtin'] === $productData['g:mpn']) {
+                    unset($productData['g:mpn']);
+                }
+
                 foreach ($productData as $k => $v) {
                     if (!empty($v)) {
                         $item->appendChild($xml->createElement($k, $v));
