@@ -30,7 +30,15 @@ $productId = (int)($_REQUEST['product_id'] ?? 0);
 
 // Controller for updating products
 if ($mode === 'update') {
-    if (!empty($_POST)) {
+    // Set possible feeds
+    $companyId = \Tygh\Registry::get('runtime.company_id');
+    $availableFeeds = db_get_array("SELECT id, `name` FROM ?:soneritics_feeds WHERE company_id = ?i", $companyId);
+    Tygh::$app['view']->assign('availableFeeds', $availableFeeds);
+
+    // Update, but only when there are active feeds
+    // This can only be used when a specific company has been chosen
+    // and prevents deleting from a feed when 'all companies' is active
+    if (!empty($_POST) && !empty($availableFeeds)) {
         db_query("DELETE FROM ?:soneritics_feed_products WHERE product_id = ?i", $productId);
 
         if (!empty($_POST['soneritics_feed_ids'])) {
@@ -39,11 +47,6 @@ if ($mode === 'update') {
             }
         }
     }
-
-    // Set possible feeds
-    $companyId = \Tygh\Registry::get('runtime.company_id');
-    $availableFeeds = db_get_array("SELECT id, `name` FROM ?:soneritics_feeds WHERE company_id = ?i", $companyId);
-    Tygh::$app['view']->assign('availableFeeds', $availableFeeds);
 
     // Set active feeds for the product
     $activeFeeds = db_get_fields("SELECT feed_id FROM ?:soneritics_feed_products WHERE product_id = ?i", $productId);
