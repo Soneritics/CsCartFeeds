@@ -23,9 +23,9 @@
  * THE SOFTWARE.
  */
 /**
- * Class GoogleSoneriticsFeedParser
+ * Class FacebookSoneriticsFeedParser
  */
-class GoogleSoneriticsFeedParser extends GoogleSoneriticsFeedParserBase
+class FacebookSoneriticsFeedParser extends GoogleSoneriticsFeedParserBase
 {
     /**
      * Get the name of the parser.
@@ -33,7 +33,7 @@ class GoogleSoneriticsFeedParser extends GoogleSoneriticsFeedParserBase
      */
     public static function getName(): string
     {
-        return 'Google';
+        return 'Facebook';
     }
 
     /**
@@ -42,6 +42,6 @@ class GoogleSoneriticsFeedParser extends GoogleSoneriticsFeedParserBase
      */
     protected function getIdField(): string
     {
-        return 'product_code';
+        return 'product_id';
     }
 }
