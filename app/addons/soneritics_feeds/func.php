@@ -23,3 +23,13 @@
  * THE SOFTWARE.
  */
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
+
+/**
+ * Escape a string to valid XML
+ * @param string $unescaped
+ * @return string
+ */
+function soneritics_feeds_xmlEscape(string $unescaped): string
+{
+    return htmlspecialchars($unescaped);
+}

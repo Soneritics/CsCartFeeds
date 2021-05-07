@@ -154,7 +154,7 @@ abstract class GoogleSoneriticsFeedParserBase implements ISoneriticsFeedParser
 
                 foreach ($productData as $k => $v) {
                     if (!empty($v)) {
-                        $item->appendChild($xml->createElement($k, $this->xmlEscape($v)));
+                        $item->appendChild($xml->createElement($k, soneritics_feeds_xmlEscape($v)));
                     }
                 }
 
@@ -236,20 +236,5 @@ abstract class GoogleSoneriticsFeedParserBase implements ISoneriticsFeedParser
                 }
             }
         }
-    }
-
-    /**
-     * Escape a string to valid XML
-     * @param string $unescaped
-     * @return string
-     */
-    private function xmlEscape(string $unescaped): string
-    {
-        return strtr(
-            $unescaped,
-            [
-                '&' => '&amp;'
-            ]
-        );
     }
 }

@@ -143,7 +143,7 @@ class VergelijkSoneriticsFeedParser implements ISoneriticsFeedParser
 
                 foreach ($productData as $k => $v) {
                     if (!empty($v)) {
-                        $item->appendChild($xml->createElement($k, $v));
+                        $item->appendChild($xml->createElement($k, soneritics_feeds_xmlEscape($v)));
                     }
                 }
 

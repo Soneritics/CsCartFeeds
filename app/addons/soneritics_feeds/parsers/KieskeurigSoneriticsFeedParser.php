@@ -143,7 +143,7 @@ class KieskeurigSoneriticsFeedParser implements ISoneriticsFeedParser
 
                 foreach ($productData as $k => $v) {
                     if (!empty($v)) {
-                        $item->appendChild($xml->createElement($k, htmlspecialchars($v)));
+                        $item->appendChild($xml->createElement($k, soneritics_feeds_xmlEscape($v)));
                     }
                 }
 

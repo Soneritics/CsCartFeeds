@@ -50,7 +50,6 @@ class DebugSoneriticsFeedParser implements ISoneriticsFeedParser
         print_r($globalData);
         print_r($parserData);
         print_r($products);
-        return;
     }
 
     /**
