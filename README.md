@@ -88,6 +88,7 @@ You must add these as product features.
 To use the Vergelijk feed, add the following features (as text features)
 and use the description exactly listed below (case insensitive):
 * ean
+* vergelijk shop category
 * vergelijk category
 * vergelijk subcategory
 * vergelijk delivery period

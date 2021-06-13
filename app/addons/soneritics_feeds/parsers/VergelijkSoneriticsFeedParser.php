@@ -95,6 +95,7 @@ class VergelijkSoneriticsFeedParser implements ISoneriticsFeedParser
             foreach ($products as $product) {
                 $check = [
                     $this->getFeature($product, 'ean'),
+                    $this->getFeature($product, 'vergelijk shop category'),
                     $this->getFeature($product, 'vergelijk category'),
                     $this->getFeature($product, 'vergelijk subcategory'),
                     $this->getFeature($product, 'vergelijk delivery period')
@@ -136,6 +137,7 @@ class VergelijkSoneriticsFeedParser implements ISoneriticsFeedParser
                     'Condition' => 'new',
                     'DeliveryCosts' => $this->getFeature($product, 'shipment cost nl', '0'),
                     'ProductEAN' => $this->getFeature($product, 'ean'),
+                    'ShopCategory' => $this->getFeature($product, 'vergelijk shop category'),
                     'Category' => $this->getFeature($product, 'vergelijk category'),
                     'SubCategory' => $this->getFeature($product, 'vergelijk subcategory'),
                     'DeliveryPeriod' => $this->getFeature($product, 'vergelijk delivery period')
