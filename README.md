@@ -40,6 +40,13 @@ Optional, you can add the feature _condition_.
 If you choose not to use this, all products will be given the _new_ condition.
 If you also want to include _used_ items,this feature is mandatory.
 
+This plugin also supports the use of custom labels, which are not mandatory.
+If you want to use these, add one or more of the following product features (as text features):
+* google_custom_label_0
+* google_custom_label_1
+* google_custom_label_2
+* google_custom_label_3
+* google_custom_label_4
 
 ## Using the Beslist Data Feed
 The Beslist data feed requires some extra information.

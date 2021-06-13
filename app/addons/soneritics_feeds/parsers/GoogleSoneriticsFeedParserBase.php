@@ -144,6 +144,11 @@ abstract class GoogleSoneriticsFeedParserBase implements ISoneriticsFeedParser
                     'g:mpn' => $this->getFeature($product, 'mpn'),
                     'g:google_product_category' => $this->getFeature($product, 'google product category'),
                     'g:product_type' => $this->getFeature($product, 'google product type'),
+                    'g:_custom_label_0' => $this->getFeature($product, 'google_custom_label_0'),
+                    'g:_custom_label_1' => $this->getFeature($product, 'google_custom_label_1'),
+                    'g:_custom_label_2' => $this->getFeature($product, 'google_custom_label_2'),
+                    'g:_custom_label_3' => $this->getFeature($product, 'google_custom_label_3'),
+                    'g:_custom_label_4' => $this->getFeature($product, 'google_custom_label_4'),
                 ];
 
                 if (!empty($productData['g:gtin']) &&
