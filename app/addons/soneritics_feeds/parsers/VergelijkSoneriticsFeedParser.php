@@ -133,14 +133,17 @@ class VergelijkSoneriticsFeedParser implements ISoneriticsFeedParser
                     'Deeplink' => $product['url'],
                     'DeeplinkPicture' => $product['main_pair']['detailed']['image_path'],
                     'basePrice' => round($product['price'], 2),
+                    'originalPrice' => round($product['list_price'], 2),
                     'Brand' => $this->getBrand($product),
+                    'Color' => $this->getFeature($product, 'color'),
                     'Condition' => 'new',
                     'DeliveryCosts' => $this->getFeature($product, 'shipment cost nl', '0'),
                     'ProductEAN' => $this->getFeature($product, 'ean'),
                     'ShopCategory' => $this->getFeature($product, 'vergelijk shop category'),
                     'Category' => $this->getFeature($product, 'vergelijk category'),
                     'SubCategory' => $this->getFeature($product, 'vergelijk subcategory'),
-                    'DeliveryPeriod' => $this->getFeature($product, 'vergelijk delivery period')
+                    'DeliveryPeriod' => $this->getFeature($product, 'vergelijk delivery period'),
+                    'promotionText' => $this->getFeature($product, 'vergelijk promotiontext')
                 ];
 
                 foreach ($productData as $k => $v) {

@@ -2,7 +2,7 @@
 Data feeds for Cs Cart.
 This data feed plugin is not as flexible as many others, but it is way more easy to use.
 This plugin lets you add predefined feeds in predefined formats.
-Adding an extra feed requires coding.
+(Adding an extra feed requires coding.)
 
 The following feeds have been implemented:
 * [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589) 
@@ -14,7 +14,10 @@ The following feeds have been implemented:
 * [Kieskeurig](https://www.kieskeurig.nl/pricefeed)
 
 
-## Shipment cost per product
+## General feed settings
+Some settings are being shared between feeds.
+
+### Shipment cost per product
 Most feeds require shipment cost. The default shipment cost cannot be used.
 To set the feed shipment cost, add the following product features:
 * Shipment cost {COUNTRY_CODE}
@@ -22,6 +25,9 @@ To set the feed shipment cost, add the following product features:
 _COUNTRY_CODE_ is the 2 character code of the country. RU, EN, NL, DE, etc.
 Use _Other_ > _Text_ as the feature type.
 
+### Color
+Feeds that have a color property, use the product feature:
+* color
 
 ## Using the Google Data Feed
 The Google data feed requires some extra information.
@@ -47,6 +53,13 @@ If you want to use these, add one or more of the following product features (as 
 * google_custom_label_2
 * google_custom_label_3
 * google_custom_label_4
+
+If you want to use another title than your product's title, add the following product feature:
+* google title
+
+ When filled in, this will be used.
+ When not filled in, the title of the product will be used.
+
 
 ## Using the Beslist Data Feed
 The Beslist data feed requires some extra information.
@@ -93,6 +106,9 @@ and use the description exactly listed below (case insensitive):
 * vergelijk subcategory
 * vergelijk delivery period
 
+* The following feature is optional:
+* vergelijk promotiontext
+
 
 ## Using the Kieskeurig Data Feed
 The Kieskeurig data feed requires some extra information.
@@ -107,12 +123,17 @@ and use the description exactly listed below (case insensitive):
 
 
 ## Screenshots
-Data feeds overview
+Data feeds overview:
+
 ![Data feed overview](.README/screenshot-01.png "Data feeds overview")
 
-Data feed settings
+
+Data feed settings:
+
 ![Data feed settings](.README/screenshot-02.png "Data feeds settings")
 
-Data feed integration in products pages
+
+Data feed integration in products pages:
+
 ![Data feeds product page integration](.README/screenshot-03.png "Data feeds product page integration")
 

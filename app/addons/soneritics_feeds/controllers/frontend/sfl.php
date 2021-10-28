@@ -25,6 +25,7 @@
 
 /**
  * SFL - Soneritics Feed Link
+ * @var string $mode
  */
 
 // Get feed data from the request parameters

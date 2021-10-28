@@ -135,6 +135,7 @@ class KieskeurigSoneriticsFeedParser implements ISoneriticsFeedParser
                     'prijs' => number_format(round($product['price'], 2), 2, '.', ''),
                     'verzendkosten' => number_format($this->getFeature($product, 'shipment cost nl', '0'), 2, '.', ''),
                     'afhaalkosten' => '0.00',
+                    'color' => $this->getFeature($product, 'color'),
                     'levertijd' => $this->getFeature($product, 'kieskeurig levertijd'),
                     'deeplink' => $product['url'],
                     'imagelink' => $product['main_pair']['detailed']['image_path'],
