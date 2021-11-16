@@ -5,14 +5,14 @@ This plugin lets you add predefined feeds in predefined formats.
 (Adding an extra feed requires coding.)
 
 The following feeds have been implemented:
-* [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589) 
-* [Daisycon](https://faq-advertiser.daisycon.com/hc/nl/articles/115000721785-Hoe-moet-ik-als-adverteerder-een-productfeed-aanleveren-)
+* [Aiden](https://aiden.cx/)
 * [Beslist](http://cl.beslist.nl/pdf/Productfeed-handleiding%20voor%20Pro%20Shops%20NL.pdf)
+* [Daisycon](https://faq-advertiser.daisycon.com/hc/nl/articles/115000721785-Hoe-moet-ik-als-adverteerder-een-productfeed-aanleveren-)
+* [Google Shopping (RSS 2.0)](https://support.google.com/merchants/answer/160589)
+* [Kieskeurig](https://www.kieskeurig.nl/pricefeed)
 * LeGuide
 * [Tweakers](https://docplayer.nl/16731720-Tweakers-pricewatch-specificaties-productfeed.html)
 * [Vergelijk](https://www.vergelijk.nl/info/partnerpagina/)
-* [Kieskeurig](https://www.kieskeurig.nl/pricefeed)
-
 
 ## General feed settings
 Some settings are being shared between feeds.
