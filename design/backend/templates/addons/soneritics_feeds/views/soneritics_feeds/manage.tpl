@@ -40,6 +40,8 @@
                     </tr>
                 {/foreach}
             </table>
+
+            <p><a href="{"soneritics_feeds.products_overview_per_feed"|fn_url}">{__("addons.soneritics_feeds.global.complete_overview")} &raquo;</a></p>
         {else}
             <p class="no-items">{__("no_data")}</p>
         {/if}

@@ -34,6 +34,18 @@ msgctxt "Languages::addons.soneritics_feeds.global.company_id"
 msgid "Company"
 msgstr "Shop"
 
+msgctxt "Languages::addons.soneritics_feeds.global.complete_overview"
+msgid "Complete overview"
+msgstr "Compleet overzicht"
+
+msgctxt "Languages::addons.soneritics_feeds.global.download_this_overview"
+msgid "Download this overview"
+msgstr "Download dit overzicht"
+
+msgctxt "Languages::addons.soneritics_feeds.global.pick_a_company_first"
+msgid "Pick a company first"
+msgstr "Kies eerst een shop"
+
 msgctxt "Languages::addons.soneritics_feeds.manage.sidebar"
 msgid "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
 msgstr "Dit is het overzicht actieve datafeeds. Hier kunnen feeds toegevoegd, aangepast en verwijderd. Tevens kan de link opgehaald worden naar de datafeed. Dit is de link die moet worden ingesteld als feed URL."

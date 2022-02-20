@@ -89,7 +89,7 @@ if ($mode === 'manage') {
     }
 
 /*******************************************************************/
-//                      UPDATE FEED SETTINGS                       //
+//                      PRODUCTS IN THE FEED                       //
 /*******************************************************************/
 } elseif ($mode === 'products') {
     $feedId = empty($_GET['soneritics_feed_id']) ? 0 : (int)$_GET['soneritics_feed_id'];
@@ -126,6 +126,119 @@ if ($mode === 'manage') {
     Tygh::$app['view']->assign('products', $products);
     Tygh::$app['view']->assign('search', $search);
     Tygh::$app['view']->assign('activeProducts', $activeProducts);
+
+/*******************************************************************/
+//               COMPLETE PRODUCT OVERVIEW PER FEED                //
+/*******************************************************************/
+} elseif ($mode === 'products_overview_per_feed') {
+    $companyId = fn_get_runtime_company_id();
+    if ($companyId > 0) {
+        // Save the data, if POSTed
+        if (!empty($_POST)) {
+            $allProductsShownOnPage = $_POST['all_products'];
+            $activeProducts = $_POST['active_products'];
+
+            // Remove all the products that were shown on the page
+            db_query(
+                "DELETE FROM ?:soneritics_feed_products
+                WHERE 1=1
+                    AND product_id IN(?a)
+                    AND feed_id IN(
+                        SELECT id
+                        FROM ?:soneritics_feeds
+                        WHERE company_id = ?i
+                    )",
+                $allProductsShownOnPage,
+                $companyId
+            );
+
+            // Add the selected products to the database
+            if (!empty($activeProducts)) {
+                foreach ($activeProducts as $feedId => $activeProductsInFeed) {
+                    foreach ($activeProductsInFeed as $activeProduct) {
+                        db_query("INSERT INTO ?:soneritics_feed_products(feed_id, product_id) VALUES(?i, ?i)", $feedId, (int)$activeProduct);
+                    }
+                }
+            }
+        }
+
+        // Get the data for the view
+        $page = empty($_GET['page']) ? 0 : (int)$_GET['page'];
+        $productCount = !empty($_GET['download']) ? 1000000 : \Tygh\Registry::get('settings.Appearance.admin_elements_per_page');
+        list($products, $search) = fn_get_products(['page' => $page], $productCount);
+        fn_gather_additional_products_data($products, ['get_icon' => true, 'get_detailed' => true]);
+
+        // Get the feeds
+        $availableFeedsComplete = db_get_array("SELECT id, `name` FROM ?:soneritics_feeds WHERE company_id = ?i", $companyId);
+        $availableFeeds = [];
+        foreach ($availableFeedsComplete as $_feed) {
+            $availableFeeds[$_feed['id']] = $_feed['name'];
+        }
+
+        // Get active products for this feed
+        $feedQuery = "
+            SELECT feed_id, product_id
+            FROM ?:soneritics_feed_products
+            WHERE feed_id IN(
+                SELECT id
+                FROM ?:soneritics_feeds
+                WHERE company_id = ?i
+            )";
+        $activeProductsComplete = db_get_array($feedQuery, $companyId);
+        $activeProducts = [];
+        foreach ($activeProductsComplete as $_activeProduct) {
+            $feedId = $_activeProduct['feed_id'];
+            $productId = $_activeProduct['product_id'];
+
+            if (!isset($activeProducts[$feedId])) {
+                $activeProducts[$feedId] = [];
+            }
+
+            $activeProducts[$feedId][] = $productId;
+        }
+
+        // Download as CSV
+        if (!empty($_GET['download'])) {
+            fn_clear_ob();
+            header('Content-Type: text/csv');
+            header('Content-Description: File Transfer');
+            header("Content-Disposition: attachment; filename=feed-overview.csv");
+            header('Content-Transfer-Encoding: binary');
+            header('Connection: Keep-Alive');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+            header('Pragma: public');
+
+            // Header row
+            echo __("code") . ";" . __("name");
+            foreach ($availableFeeds as $availableFeed) {
+                echo ";" . $availableFeed;
+            }
+            echo "\n";
+
+            // Product rows
+            foreach ($products as $product) {
+                echo '"' . str_replace('"', '', $product['product_code']) . '";';
+                echo '"' . str_replace('"', '', $product['product']) . '"';
+
+                foreach ($availableFeeds as $feedId => $availableFeed) {
+                    echo ";";
+                    if (in_array($product['product_id'], $activeProducts[$feedId])) {
+                        echo "X";
+                    }
+                }
+                echo "\n";
+            }
+
+            die;
+        }
+
+        Tygh::$app['view']->assign('products', $products);
+        Tygh::$app['view']->assign('search', $search);
+        Tygh::$app['view']->assign('availableFeeds', $availableFeeds);
+        Tygh::$app['view']->assign('activeProducts', $activeProducts);
+    }
+
 
 /*******************************************************************/
 //                      INCOMPLETE PRODUCTS                        //

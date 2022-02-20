@@ -38,6 +38,18 @@ msgctxt "Languages::addons.soneritics_feeds.global.company_id"
 msgid "Company"
 msgstr "Unternehmen"
 
+msgctxt "Languages::addons.soneritics_feeds.global.complete_overview"
+msgid "Complete overview"
+msgstr "Complete overview"
+
+msgctxt "Languages::addons.soneritics_feeds.global.download_this_overview"
+msgid "Download this overview"
+msgstr "Download this overview"
+
+msgctxt "Languages::addons.soneritics_feeds.global.pick_a_company_first"
+msgid "Pick a company first"
+msgstr "Pick a company first"
+
 msgctxt "Languages::addons.soneritics_feeds.manage.sidebar"
 msgid "This is the active data feed overview. On this page you can add feeds, manage their settings and delete them. Also, the direct link to the feed can be opened. This link must be provided when installing the feed."
 msgstr "Dies ist die aktive Datenfeed-Übersicht. Auf dieser Seite können Sie Feeds hinzufügen, deren Einstellungen verwalten und löschen. Außerdem kann die direkte Verbindung zum Feed geöffnet werden. Dieser Link muss bei der Installation des Feeds angegeben werden."
