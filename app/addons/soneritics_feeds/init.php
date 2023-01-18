@@ -38,6 +38,7 @@ require_once __DIR__. '/parsers/TweakersSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/VergelijkSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/BeslistSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/KieskeurigSoneriticsFeedParser.php';
+require_once __DIR__. '/parsers/WunderkindSoneriticsFeedParser.php';
 require_once __DIR__. '/parsers/SoneriticsFeedParserFactory.php';
 require_once __DIR__. '/Repository.php';
 
